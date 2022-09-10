@@ -107,8 +107,29 @@ Callback = <function> - The function of the toggle.
 ]]
 
 
+Main:AddToggle({
+	Name = "AutoBuyRate",
+	Default = false,
+	Callback = function(Value)
+		_G.autospeed = Value;
 
+task.spawn(function()
+    while _G.autospeed do
+        local args = {
+            [1] = 1
+        }
+        game:GetService("ReplicatedStorage").GTycoonClient.Remotes.BuySpeed:FireServer(unpack(args))
+        wait(0.2)
+    end
+end)
+	end    
+})
 
+--[[
+Name = <string> - The name of the toggle.
+Default = <bool> - The default value of the toggle.
+Callback = <function> - The function of the toggle.
+]]
 
 
 
@@ -126,4 +147,4 @@ Main:AddSlider({
 	end    
 })
 
-
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Vernyfx/Slime-Tower-Tycoon/main/Slimetowerscript",true))();
